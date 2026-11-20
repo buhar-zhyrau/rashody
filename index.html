@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Учёт расходов</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main>
+    <header><p class="eyebrow">Личные финансы</p><h1>Учёт расходов</h1><p class="muted">Записывайте траты и следите за расходами.</p></header>
+    <section class="total" aria-labelledby="total-title"><h2 id="total-title">Итого за текущий месяц</h2><p id="month-name"></p><strong id="month-total">0,00</strong></section>
+    <p id="storage-message" role="alert" hidden></p>
+    <section class="card" aria-labelledby="form-title">
+      <h2 id="form-title">Новая трата</h2>
+      <form id="expense-form" novalidate>
+        <div class="grid">
+          <label>Сумма<input id="amount" name="amount" inputmode="decimal" placeholder="0,00" required aria-describedby="form-error"></label>
+          <label>Категория<select id="category" name="category" required></select></label>
+        </div>
+        <button class="secondary" type="button" id="category-toggle" aria-expanded="false" aria-controls="category-form">Добавить категорию</button>
+        <div class="grid lower">
+          <label>Дата<input type="date" id="date" name="date" required min="1000-01-01" max="9999-12-31"></label>
+          <label>Комментарий <span class="muted">— необязательно</span><input id="comment" name="comment" placeholder="На что потратили"></label>
+        </div>
+        <p class="error" id="form-error" role="alert"></p>
+        <button type="submit" class="primary">Добавить трату</button>
+      </form>
+      <form id="category-form" class="category-form" hidden novalidate>
+        <label>Новая категория<input id="category-name" required aria-describedby="category-error" placeholder="Например, Здоровье"></label>
+        <p class="error" id="category-error" role="alert"></p>
+        <button type="submit" class="secondary">Сохранить категорию</button>
+      </form>
+      <p id="status" class="muted" role="status"></p>
+    </section>
+    <section class="card" aria-labelledby="list-title">
+      <h2 id="list-title">Список трат</h2>
+      <div class="grid period"><label>С даты<input id="from-date" type="date" min="1000-01-01" max="9999-12-31"></label><label>По дату<input id="to-date" type="date" min="1000-01-01" max="9999-12-31"></label></div>
+      <div class="presets" aria-label="Период просмотра"><button type="button" data-period="1">Сутки</button><button type="button" data-period="7">7 дней</button><button type="button" data-period="14">14 дней</button><button type="button" data-period="month">Месяц</button><button type="button" data-period="all" aria-pressed="true">Все траты</button></div>
+      <p id="period-error" class="error" role="alert"></p>
+      <p id="period-total" class="period-total" hidden></p>
+      <p id="empty" class="empty">Пока нет трат</p>
+      <ul id="expenses" class="expenses"></ul>
+    </section>
+    <footer>Данные хранятся только в этом браузере.</footer>
+  </main>
+</body>
+</html>
